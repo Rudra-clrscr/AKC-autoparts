@@ -1,23 +1,24 @@
 const express = require("express");
-const path = require("path");
-
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.set("view engine", "ejs");
-app.set("views", path.join(process.cwd(), "backend", "views"));
-
+/* ✅ Root route – MUST NOT use res.render */
 app.get("/", (req, res) => {
-  res.render("index");
+  res.send(`
+    <h1>AKC Autoparts API is running</h1>
+    <p>Backend deployed successfully on Vercel.</p>
+  `);
 });
 
+/* ✅ Backend routes */
 const routes = require("../backend/routes");
-app.use("/", routes);
+app.use("/api", routes);
 
+/* ✅ Fallback */
 app.use((req, res) => {
-  res.status(404).render("index");
+  res.status(404).json({ error: "Route not found" });
 });
 
 module.exports = app;
