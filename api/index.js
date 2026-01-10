@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 /* ✅ Routes */
-const routes = require("../backend/routes");
+const routes = require("./backend/routes");
 app.use("/", routes);
 
 /* ✅ Safe fallback */
