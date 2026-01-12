@@ -1,15 +1,16 @@
-const express = require("express");
+app.set("trust proxy", 1);
 
-const app = express();
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
 
-app.use(express.json());
+const MONGO_URI = process.env.MONGO_URI;
 
-app.get("/", (req, res) => {
-  res.send("Backend root is working");
-});
+mongoose.connect(MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
-app.get("/api/health", (req, res) => {
-  res.json({ success: true });
-});
-
-module.exports = app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
