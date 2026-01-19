@@ -6,7 +6,7 @@ const { getProducts } = require('./models/productData');
 const Review = require('./models/review');
 
 const session = require('express-session');
-const User = require('./models/User');
+const User = require('./models/user');
 const Order = require('./models/order');
 const app = express();
 const cookieParser = require("cookie-parser");
