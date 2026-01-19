@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
 const adminAuth = require('../middleware/adminAuth');
-const products = require('../models/productData');
+const { getProducts } = require('../models/productData');
 
-router.get('/products', adminAuth, (req, res) => {
+router.get('/products', adminAuth, async (req, res) => {
+  const products = await getProducts();
   res.render('admin/products', { products });
 });
 

@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
-const products= require('./models/productData')
-const orderSchema = new mongoose.Schema({
+
+const orderSchema = new mongoose.Schema(
+  {
+    userId: String,
+
     customerName: String,
     address: String,
     city: String,
@@ -9,19 +12,27 @@ const orderSchema = new mongoose.Schema({
     pin: String,
 
     totalPrice: Number,
-    status: { type: String, default: "Order Placed" },
+
+    paymentMethod: String,
+    paymentStatus: String,
+
+    status: {
+      type: String,
+      default: "Pending"
+    },
 
     items: [
-        {
-         id: String,
-         name: String,
-         qty: Number,
-         price: Number,       
-        }
-    ],
-
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
-});
+      {
+        id: String,
+        name: String,
+        qty: Number,
+        price: Number
+      }
+    ]
+  },
+  {
+    timestamps: true   // ⭐ MOST IMPORTANT
+  }
+);
 
 module.exports = mongoose.model("Order", orderSchema);

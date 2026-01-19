@@ -5,122 +5,266 @@
   <title>Admin Orders</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{
+  box-sizing:border-box;
+}
 
-  <style>
-    body{
-      margin:0;
-      font-family:'Nunito Sans',sans-serif;
-      background:#f3f4f6;
-    }
+body{
+  margin:0;
+  font-family:'Nunito Sans',sans-serif;
+  background:linear-gradient(135deg,#eef3ff,#f9fbff);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  padding:50px 20px;
+  color:#0f172a;
+}
 
-    .main{
-      margin-left:260px;
-      padding:32px;
-    }
+/* ===== MAIN ===== */
+.main{
+  width:100%;
+  max-width:1250px;
+}
 
-    /* BRAND */
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:30px;
-    }
+/* ===== PAGE TITLE ===== */
+h1{
+  text-align:center;
+  margin-bottom:35px;
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:.8px;
+}
 
-    .brand img{
-      width:40px;
-      height:40px;
-      border-radius:10px;
-      background:#fff;
-      padding:4px;
-    }
+/* ===== TABLE ===== */
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 18px;
+}
 
-    .brand span{
-      font-size:20px;
-      font-weight:700;
-    }
+/* ===== HEADER ===== */
+th{
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  color:#fff;
+  padding:18px;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
 
-    h1{
-      margin-bottom:20px;
-    }
+th:first-child{border-radius:16px 0 0 16px;}
+th:last-child{border-radius:0 16px 16px 0;}
 
-    table{
-      width:100%;
-      background:#fff;
-      border-radius:16px;
-      box-shadow:0 15px 35px rgba(0,0,0,.08);
-      border-collapse:collapse;
-      overflow:hidden;
-    }
+/* ===== ORDER ROW CARD ===== */
+tr{
+  background:#ffffff;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(15,23,42,.12);
+  transition:.3s ease;
+}
 
-    th,td{
-      padding:16px;
-      text-align:left;
-    }
 
-    th{
-      background:#111827;
-      color:#fff;
-      font-weight:700;
-    }
+/* ===== CELLS ===== */
+td{
+  padding:18px;
+  vertical-align:top;
+  font-size:15px;
+  color:#0f172a;
+}
 
-    tr:hover{
-      background:#f9fafb;
-    }
+/* CUSTOMER */
+td:first-child{
+  font-weight:800;
+  font-size:16px;
+}
 
-    select{
-      padding:6px 12px;
-      border-radius:8px;
-      border:1px solid #d1d5db;
-      font-weight:600;
-      cursor:pointer;
-    }
+/* ADDRESS */
+td:nth-child(2){
+  font-size:13px;
+  line-height:1.5;
+  color:#475569;
+  max-width:240px;
+}
 
-    .Pending{color:#92400e}
-    .Packed{color:#1d4ed8}
-    .Delivered{color:#065f46}
-    .Cancelled{color:#991b1b}
-  </style>
+/* PART NAME */
+td:nth-child(3) div{
+  background:#f1f5f9;
+  padding:6px 10px;
+  border-radius:8px;
+  margin-bottom:6px;
+  font-size:13px;
+  font-weight:600;
+}
+
+/* PART ID */
+td:nth-child(4) div{
+  font-size:13px;
+  color:#2563eb;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+/* TOTAL */
+td:nth-child(5){
+  font-weight:900;
+  font-size:16px;
+  color:#2563eb;
+}
+
+/* ===== STATUS DROPDOWN ===== */
+select{
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid #e5e7eb;
+  font-weight:800;
+  cursor:pointer;
+  background:#ffffff;
+  outline:none;
+  transition:.2s ease;
+}
+
+select:hover{
+  box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+/* STATUS COLORS */
+.Pending{
+  color:#92400e;
+  background:#fff7ed;
+}
+
+.Packed{
+  color:#1d4ed8;
+  background:#eff6ff;
+}
+
+.Delivered{
+  color:#065f46;
+  background:#ecfdf5;
+}
+
+.Cancelled{
+  color:#991b1b;
+  background:#fef2f2;
+}
+
+/* DATE */
+td:last-child{
+  font-size:13px;
+  color:#475569;
+  white-space:nowrap;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  table{
+    font-size:14px;
+  }
+  td{
+    padding:14px;
+  }
+}
+.search-box{
+  width:100%;
+  max-width:520px;
+  margin:0 auto 30px;
+}
+
+.search-box input{
+  width:100%;
+  padding:14px 18px;
+  border-radius:14px;
+  border:1px solid #d1d5db;
+  font-size:15px;
+  font-weight:600;
+  outline:none;
+  transition:.25s ease;
+}
+
+.search-box input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,.15);
+}
+
+</style>
+
 </head>
 
 <body>
 
 <div class="main">
 
-  <!-- BRAND -->
-  <div class="brand">
-    <img src="https://th.bing.com/th/id/R.35647c0cec927537fa43ed1836a446c2?rik=7Lzu71WwPczowA&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fhyundai-logo-png-hyundai-car-logo-png-brand-image-1749.png&ehk=UI8O%2bS7ci5lpalKI9Rf1u%2bMYvCgw%2bVwAeupMAcxmk2g%3d&risl=&pid=ImgRaw&r=0">
-    <span>AKC ADMIN</span>
-  </div>
 
   <h1>Orders</h1>
+  <div class="search-box">
+  <input
+    type="text"
+    id="orderSearch"
+    placeholder="Search by customer, part name, part ID, address..."
+    onkeyup="searchOrders()"
+  >
+</div>
+
 
   <table>
-    <tr>
-      <th>Customer</th>
-      <th>Total</th>
-      <th>Status</th>
-      <th>Date</th>
-    </tr>
+   <tr>
+  <th>Customer</th>
+  <th>Address</th>
+  <th>Part Name</th>
+  <th>Part ID</th>
+  <th>Total</th>
+  <th>Status</th>
+  <th>Date</th>
+</tr>
 
-    <% orders.forEach(o => { %>
-      <tr>
-        <td><%= o.customerName %></td>
-        <td>₹ <%= o.totalPrice %></td>
 
-        <td>
-        <select onchange="updateStatus('<%= o._id %>', this.value)" class="<%= o.status %>">
-  <option value="Pending" <%= o.status === "Pending" ? "selected" : "" %>>Pending</option>
-  <option value="Packed" <%= o.status === "Packed" ? "selected" : "" %>>Packed</option>
-  <option value="Delivered" <%= o.status === "Delivered" ? "selected" : "" %>>Delivered</option>
-  <option value="Cancelled" <%= o.status === "Cancelled" ? "selected" : "" %>>Cancelled</option>
-</select>
+   <% orders.forEach(function(o){ %>
+<tr>
 
-        </td>
+  <!-- CUSTOMER -->
+  <td><%= o.customerName %></td>
 
-        <td><%= new Date(o.createdAt).toDateString() %></td>
-      </tr>
+  <!-- ADDRESS -->
+  <td style="max-width:220px;font-size:13px;line-height:1.4;">
+    <%= o.address %>, <%= o.city %>, <%= o.state %> - <%= o.pin %>
+  </td>
+
+  <!-- PART NAME -->
+  <td>
+    <% o.items.forEach(function(i){ %>
+      <div><%= i.name %></div>
     <% }) %>
-  </table>
+  </td>
+
+  <!-- PART ID -->
+  <td>
+    <% o.items.forEach(function(i){ %>
+      <div><%= i.id %></div>
+    <% }) %>
+  </td>
+
+  <!-- TOTAL -->
+  <td style="font-weight:700;color:#2563eb;">
+    ₹ <%= o.totalPrice %>
+  </td>
+
+  <!-- STATUS -->
+  <td>
+    <select onchange="updateStatus('<%= o._id %>', this.value)" class="<%= o.status %>">
+      <option value="Pending" <%= o.status === "Pending" ? "selected" : "" %>>Pending</option>
+      <option value="Packed" <%= o.status === "Packed" ? "selected" : "" %>>Packed</option>
+      <option value="Delivered" <%= o.status === "Delivered" ? "selected" : "" %>>Delivered</option>
+      <option value="Cancelled" <%= o.status === "Cancelled" ? "selected" : "" %>>Cancelled</option>
+    </select>
+  </td>
+
+  <!-- DATE -->
+  <td><%= new Date(o.createdAt).toDateString() %></td>
+
+</tr>
+<% }) %>
+
 
 </div>
 
@@ -136,6 +280,19 @@ function updateStatus(orderId, status){
     if(data.success){
       location.reload();
     }
+  });
+}
+</script>
+<script>
+function searchOrders() {
+  const input = document.getElementById("orderSearch").value.toLowerCase();
+  const rows = document.querySelectorAll("table tr");
+
+  rows.forEach((row, index) => {
+    if (index === 0) return; // skip header
+
+    const text = row.innerText.toLowerCase();
+    row.style.display = text.includes(input) ? "" : "none";
   });
 }
 </script>

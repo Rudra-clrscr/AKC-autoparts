@@ -108,10 +108,65 @@
       font-weight:bold;
       margin-bottom:15px;
     }
+    /* ===== HEADER ===== */
+.checkout-header {
+  max-width: 900px;
+  margin: 0 auto 20px;
+  padding: 12px 18px;
+  background: #ffffff;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.checkout-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkout-logo {
+  height: 40px;
+  cursor: pointer;
+}
+
+.checkout-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.checkout-right {
+  font-size: 14px;
+  color: #6b7280;
+}
+
   </style>
 </head>
 
 <body>
+  <header class="checkout-header">
+
+  <!-- LOGO → HOME -->
+  <a href="/" style="text-decoration:none;color:inherit;">
+    <div class="checkout-left">
+      <img
+        src="https://th.bing.com/th/id/R.35647c0cec927537fa43ed1836a446c2?rik=7Lzu71WwPczowA&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fhyundai-logo-png-hyundai-car-logo-png-brand-image-1749.png&ehk=UI8O%2bS7ci5lpalKI9Rf1u%2bMYvCgw%2bVwAeupMAcxmk2g%3d&risl=&pid=ImgRaw&r=0"
+        class="checkout-logo"
+        alt="AKC AUTO PARTS"
+      >
+      <span class="checkout-title">AKC AUTO PARTS</span>
+    </div>
+  </a>
+
+  <div class="checkout-right">
+    Parts for Hyundai • Tata • Bajaj
+  </div>
+
+</header>
+
 
 <div class="box">
   <h2>Customer Details</h2>

@@ -11,7 +11,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(process.cwd(), "backend", "views"));
 
 /* Routes */
-const routes = require("../backend/routes");
+const routes = require("../routes");
 app.use("/", routes);
 
 /* Root route */

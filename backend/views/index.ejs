@@ -743,6 +743,121 @@ select.sort:focus{
   font-size:20px;
   color:#6b7280;
 }
+/* ===== FOOTER / ABOUT US ===== */
+
+.footer {
+  background: #0f172a;
+  color: #e5e7eb;
+  margin-top: 80px;
+  padding: 50px 20px 20px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+}
+
+.footer-box h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+
+.footer-box a {
+  color: #cbd5f5;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-box a:hover {
+  color: #38bdf8;
+  text-decoration: underline;
+}
+
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.social-links a {
+  text-decoration: none;
+  color: #cbd5f5;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.social-links a:hover {
+  color: #38bdf8;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px;
+  color: #9ca3af;
+}
+/* ==========================
+   Language Dropdown
+   ========================== */
+
+.lang-select {
+  position: relative;
+}
+
+.lang-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+
+  padding: 8px 36px 8px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s ease;
+
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* hover */
+.lang-select select:hover {
+  border-color: #ea580c;
+}
+
+/* focus */
+.lang-select select:focus {
+  border-color: #ea580c;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.25);
+}
+
+/* arrow icon */
+.lang-select::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #374151;
+  pointer-events: none;
+}
 
 </style>
 </head>
@@ -750,6 +865,9 @@ select.sort:focus{
 
 <!-- TOPBAR -->
 <header class="topbar">
+<h1 style="color:red"><%= t.test %></h1>
+
+
   <div class="logo">
     <img src="https://th.bing.com/th/id/R.35647c0cec927537fa43ed1836a446c2?rik=7Lzu71WwPczowA&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fhyundai-logo-png-hyundai-car-logo-png-brand-image-1749.png&ehk=UI8O%2bS7ci5lpalKI9Rf1u%2bMYvCgw%2bVwAeupMAcxmk2g%3d&risl=&pid=ImgRaw&r=0" alt="Hyundai logo">
     <div class="brand">AKC AUTO PARTS</div>
@@ -758,6 +876,21 @@ select.sort:focus{
   <div style="display:flex; align-items:center; gap:12px; margin-left:18px;">
     <div class="muted">Parts for Hyundai • Tata • Bajaj</div>
   </div>
+  <select id="languageSelect">
+  <option value="en">English</option>
+  <option value="hi">हिंदी</option>
+</select>
+
+<script>
+document.getElementById("languageSelect").value = "<%= lang %>";
+
+document.getElementById("languageSelect").addEventListener("change", function () {
+  document.cookie = "lang=" + this.value + "; path=/";
+  location.reload();
+});
+</script>
+
+
 
   <div class="top-actions">
     <button class="icon-btn" title="Categories" id="toggleSidebar" onclick="toggleSidebar()">
@@ -766,7 +899,8 @@ select.sort:focus{
 
     <div class="cart-badge">
       <button class="btn" id="openCartBtn" onclick="window.location.href='/cart'">
-        🛒 Cart
+        🛒 <%= t.cart || "Cart" %>
+
       </button>
       <div class="count" id="cartCount" style="display:none">0</div>
     </div>
@@ -927,6 +1061,7 @@ select.sort:focus{
 
   </section>
 </main>
+
 
 <script>
 /* ------------ DATA: products ------------- */
@@ -1323,6 +1458,72 @@ function confirmSignout() {
     const sidebar = document.getElementById('sidebar');
     if (sidebar) sidebar.style.display = 'none';
   });
+</script>
+<!-- ===== ABOUT US / FOOTER ===== -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- Company Info -->
+    <div class="footer-box">
+      <h3>About AKC Parts</h3>
+      <p>
+        AKC Parts is a trusted supplier of high-quality automobile spare parts.
+        We focus on reliability, affordability, and fast delivery to keep your
+        vehicle running smoothly.
+      </p>
+      <p>
+        Our mission is to provide genuine parts with transparent pricing and
+        excellent customer support.
+      </p>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-box">
+      <!-- Contact Info -->
+<div class="footer-box">
+  <h3>Contact Us</h3>
+
+  <p>
+    <strong>Email:</strong>
+    <a href="mailto:vivekmishra261105@gmail.com">vivekmishra261105@gmail.com</a>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <a href="tel:+91 63975 40110">+91 63975 40110</a>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <a href="https://www.google.com/maps/place/AKC+Hyundai-+Parsakhera+Ind.+Area/@28.4255407,79.3528077,17z/data=!3m1!4b1!4m6!3m5!1s0x390aa86cf1ff5d31:0x466accda9ebc0370!8m2!3d28.425536!4d79.3553826!16s%2Fg%2F1ptxtv4n0?entry=ttu&g_ep=EgoyMDI2MDExMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+      AKC Hyundai, Parsakhera
+    </a>
+  </p>
+</div>
+
+
+    <!-- Social Media -->
+    <div class="footer-box">
+      <h3>Follow Us</h3>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Twitter">Twitter</a>
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> AKC Parts. All rights reserved.
+  </div>
+
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>

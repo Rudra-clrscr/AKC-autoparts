@@ -360,6 +360,17 @@
   font-size: 14px;
   color: #4b5563;
 }
+.stock.green {
+  background: #16a34a;
+}
+
+.stock.orange {
+  background: #f97316;
+}
+
+.stock.red {
+  background: #dc2626;
+}
 
     /* sign-in prompt (center modal) */
     .modal-overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.45); display:none; align-items:center; justify-content:center; z-index:9998; }
@@ -375,9 +386,25 @@
 
 <header class="glass-header">
   <div class="header-left">
-    <img src="https://th.bing.com/th/id/R.35647c0cec927537fa43ed1836a446c2?rik=7Lzu71WwPczowA&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fhyundai-logo-png-hyundai-car-logo-png-brand-image-1749.png&ehk=UI8O%2bS7ci5lpalKI9Rf1u%2bMYvCgw%2bVwAeupMAcxmk2g%3d&risl=&pid=ImgRaw&r=0" class="header-logo">
-    <span class="brand-title">AKC AUTO PARTS</span>
+
+    <!-- LOGO CLICK → HOME -->
+    <a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+
+      <img 
+        src="https://th.bing.com/th/id/R.35647c0cec927537fa43ed1836a446c2?rik=7Lzu71WwPczowA&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fhyundai-logo-png-hyundai-car-logo-png-brand-image-1749.png&ehk=UI8O%2bS7ci5lpalKI9Rf1u%2bMYvCgw%2bVwAeupMAcxmk2g%3d&risl=&pid=ImgRaw&r=0"
+        class="header-logo"
+        alt="AKC AUTO PARTS"
+        style="cursor:pointer;"
+      >
+
+      <span class="brand-title" style="cursor:pointer;">
+        AKC AUTO PARTS
+      </span>
+
+    </a>
+
   </div>
+
 
   <div class="header-center"></div>
 
@@ -427,7 +454,15 @@
         <div class="old-price" id="prodOldPrice"></div>
       </div>
       <div style="margin-left:auto">
-        <div class="stock" id="stockBadge">In stock</div>
+          <% 
+    let stockClass = "red";
+    if (product.stock === "In Stock") stockClass = "green";
+    else if (product.stock === "Limited") stockClass = "orange";
+  %>
+
+  <div class="stock <%= stockClass %>">
+    <%= product.stock %>
+  </div>
       </div>
     </div>
     <div class="delivery-box">
@@ -772,10 +807,7 @@ if (!product) {
     specTable.appendChild(tr);
   }
 
-  // stock badge (demo logic)
-  const stockStatus = Math.random() > 0.12 ? 'In stock' : 'Limited';
-  stockBadge.textContent = stockStatus;
-  if (stockStatus === 'Limited') { stockBadge.style.background = '#f97316'; }
+ 
 
   // stars (UI only)
   const starsWrap = document.getElementById('stars');
