@@ -45,9 +45,20 @@ app.use((req, res, next) => {
 
 // ====== MongoDB Connection ======
 
+const mongoose = require("mongoose");
+
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+  .then(() => {
+    console.log("✅ MongoDB connected");
+
+    app.listen(process.env.PORT || 10000, () => {
+      console.log("🚀 Server started");
+    });
+
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection failed:", err);
+  });
 
 // ====== Express Setup ======
 app.set('view engine', 'ejs');
