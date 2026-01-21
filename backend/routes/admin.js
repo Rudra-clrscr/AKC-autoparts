@@ -26,6 +26,8 @@ router.post("/login", async (req, res) => {
       }
     });
 
+    console.log("Admin found:", admin); // Add this line
+
     if (!admin) {
       return res.redirect("/admin/login");
     }
@@ -43,6 +45,7 @@ router.post("/login", async (req, res) => {
     console.log("Admin login error:", err);
     res.redirect("/admin/login");
   }
+  
 });
 
 // ============================
