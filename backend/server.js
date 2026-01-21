@@ -48,6 +48,12 @@ app.use(
   })
 );
 
+// Middleware to make session available to all EJS templates
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
 app.use(require("./middleware/language"));
 
 app.get("/test-products", async (req, res) => {
