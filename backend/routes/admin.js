@@ -14,39 +14,44 @@ router.get("/login", (req, res) => {
 // ============================
 // ADMIN LOGIN HANDLER (SQL)
 // ============================
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const admin = await User.findOne({
-      where: {
-        email,
-        password,
-        role: "admin"
-      }
-    });
-
-    console.log("Admin found:", admin); // Add this line
-
-    if (!admin) {
-      return res.redirect("/admin/login");
+    // Add validation
+    if (!email || !password) {
+      return res.render('admin/login', { error: 'Email and password required' });
     }
 
+    const admin = await User.findOne({
+      where: { email, role: 'admin' }
+    });
+
+    // ✅ Add user feedback
+    if (!admin) {
+      return res.render('admin/login', { error: 'Invalid email or password' });
+    }
+
+    // TODO: Use bcrypt.compare() instead of plaintext comparison
+    if (admin.password !== password) {  // ❌ Plaintext comparison
+      return res.render('admin/login', { error: 'Invalid email or password' });
+    }
+
+    // Set session
     req.session.user = {
-      id: admin.id,          // ✅ SQL id
+      id: admin.id,
       name: admin.name,
       email: admin.email,
       role: admin.role
     };
 
-    res.redirect("/admin/dashboard");
-
+    return res.redirect('/admin/dashboard');
   } catch (err) {
-    console.log("Admin login error:", err);
-    res.redirect("/admin/login");
+    console.error('❌ Admin login error:', err);
+    return res.render('admin/login', { error: 'Server error. Please try again.' });
   }
-  
 });
+
 
 // ============================
 // ADMIN LOGOUT
