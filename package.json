@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "backend/server.js",
   "scripts": {
-    "start": "node backend/server.js"
+    "start": "node backend/server.js",
+    "seed:admin": "node backend/routes/seedAdmin.js"
   },
   "dependencies": {
     "body-parser": "^2.2.1",
